@@ -32,7 +32,13 @@ export const newProduct = async (req, res) => {
 
 		console.log("product", product);
 		res.send(`${product} has been added to our database`);
-	} catch (error) {}
+	} catch (error) {
+		res
+			.status(500)
+			.json({
+				msg: "unfortunately, your product could not be added to the database",
+			});
+	}
 };
 
 export const deleteProduct = async (req, res) => {
