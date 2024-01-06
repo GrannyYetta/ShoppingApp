@@ -42,7 +42,7 @@ export const userLogin = async (req, res) => {
 				}
 			});
 		} else {
-			res.send();
+			res.send("This user is not in our database. Please create a user to proceed.");
 		}
 
 		res.json({ msg: `You have successfully logged in.`, user });

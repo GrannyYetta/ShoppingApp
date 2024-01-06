@@ -1,43 +1,36 @@
-import { trusted } from "mongoose";
-import ProductModel from "../models/productModels";
+import ProductModel from "../models/productModels.js";
 
-export const singleProduct = async (req, res) => {
-	const query = req.productQuery;
+export const getProductInfo = async (req, res) => {
+	const { id } = req.query;
+	console.log("query", id);
+
+	const findMethod = id === undefined ? ProductModel.find(): ProductModel.findById(id)
 
 	try {
-		const product = await ProductModel.findOne(query);
+		const product = await findMethod;
 		res.json(product);
 	} catch (error) {
 		res.status(500).json(error.message);
 	}
 };
 
-export const allProducts = async (req, res) => {
-	try {
-		const products = await ProductModel.find();
-	} catch (error) {
-		res.status(500).json(error.message);
-	}
-};
-
 export const newProduct = async (req, res) => {
-	const { body } = req;
+	const { productname, description, quantity, category, price } = req.body;
 	try {
 		const product = await ProductModel.create({
-			name: "Apples",
-			description: "overrated fruit",
-			quantity: 5,
-			category: "food",
+			productname: productname,
+			description: description,
+			quantity: quantity,
+			category: category,
+			price: price,
 		});
 
 		console.log("product", product);
 		res.send(`${product} has been added to our database`);
 	} catch (error) {
-		res
-			.status(500)
-			.json({
-				msg: "unfortunately, your product could not be added to the database",
-			});
+		res.status(500).json({
+			msg: "unfortunately, your product could not be added to the database",
+		});
 	}
 };
 

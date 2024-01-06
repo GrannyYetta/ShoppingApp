@@ -3,10 +3,11 @@ import mongoose, { mongo } from "mongoose";
 const { Schema } = mongoose;
 
 const ProductSchema = new Schema({
-	name: String,
+	productname: String,
 	description: String,
-	quantity: Number,
+	inStock: Number,
 	category: String,
+	price: { type: Number, required: true },
 });
 
 const ProductModel = mongoose.model("Product", ProductSchema);

@@ -6,7 +6,7 @@ import {
 	userRegistration,
 	userUpdate,
 } from "../controllers/userControllers.js";
-import { hashPassword } from "../middlewares/hasPassword.js";
+import { hashPassword } from "../middlewares/hashPassword.js";
 
 const userRouter = express.Router();
 
