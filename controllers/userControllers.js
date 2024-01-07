@@ -42,7 +42,9 @@ export const userLogin = async (req, res) => {
 				}
 			});
 		} else {
-			res.send("This user is not in our database. Please create a user to proceed.");
+			res.send(
+				"This user is not in our database. Please create a user to proceed."
+			);
 		}
 
 		res.json({ msg: `You have successfully logged in.`, user });
@@ -74,4 +76,14 @@ export const userDeletion = async (req, res) => {
 	} catch (error) {
 		res.status(500).json({ msg: error.message });
 	}
+};
+
+export const accessUserProfile = async (req, res) => {
+const user = req.userStatus;
+
+if (data != "authenticated") {
+	res.json ({msg: "not authenticated for this aciton"})
+}
+
+res.json({msg: user})
 };
